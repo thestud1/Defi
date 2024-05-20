@@ -278,7 +278,7 @@ contract GetExchangeRate {
         factory = IFactory(0x0Ca73866dFf0f6b0508F5Cbb223C857C19463e07);
         router = IRouter(0x5DA88dF55AF2E5681D33f36e5916d63797BF4766);       
         pairGetter = PairGetter(0x92721e164A5848C0071d6Be7D4c4B11d7932e0aF);
-        wechselkurs = Wechselkurs(0x8a968C762063170cBBB3eac00F530cB425D5806F);
+        wechselkurs = Wechselkurs(0x3466EeC48Ec873007F8457f506B631bbDeC19eB1);
     }
 
     function getExRates() public returns (bool) {
