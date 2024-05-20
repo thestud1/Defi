@@ -49,15 +49,14 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"allowance(address,address)": "dd62ed3e",
-			"approve(address,uint256)": "095ea7b3",
-			"balanceOf(address)": "70a08231",
-			"decimals()": "313ce567",
-			"name()": "06fdde03",
-			"symbol()": "95d89b41",
-			"totalSupply()": "18160ddd",
-			"transfer(address,uint256)": "a9059cbb",
-			"transferFrom(address,address,uint256)": "23b872dd"
+			"allPairs(uint256)": "1e3dd18b",
+			"allPairsLength()": "574f2ba3",
+			"createPair(address,address)": "c9c65396",
+			"feeTo()": "017e7e58",
+			"feeToSetter()": "094b7415",
+			"getPair(address,address)": "e6a43905",
+			"setFeeTo(address)": "f46901ed",
+			"setFeeToSetter(address)": "a2e74af6"
 		}
 	},
 	"abi": [
@@ -67,64 +66,53 @@
 				{
 					"indexed": true,
 					"internalType": "address",
-					"name": "owner",
+					"name": "token0",
 					"type": "address"
 				},
 				{
 					"indexed": true,
 					"internalType": "address",
-					"name": "spender",
+					"name": "token1",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "pair",
 					"type": "address"
 				},
 				{
 					"indexed": false,
 					"internalType": "uint256",
-					"name": "value",
+					"name": "",
 					"type": "uint256"
 				}
 			],
-			"name": "Approval",
+			"name": "PairCreated",
 			"type": "event"
 		},
 		{
-			"anonymous": false,
 			"inputs": [
 				{
-					"indexed": true,
-					"internalType": "address",
-					"name": "from",
-					"type": "address"
-				},
-				{
-					"indexed": true,
-					"internalType": "address",
-					"name": "to",
-					"type": "address"
-				},
-				{
-					"indexed": false,
 					"internalType": "uint256",
-					"name": "value",
+					"name": "",
 					"type": "uint256"
 				}
 			],
-			"name": "Transfer",
-			"type": "event"
-		},
-		{
-			"inputs": [
+			"name": "allPairs",
+			"outputs": [
 				{
 					"internalType": "address",
-					"name": "owner",
-					"type": "address"
-				},
-				{
-					"internalType": "address",
-					"name": "spender",
+					"name": "pair",
 					"type": "address"
 				}
 			],
-			"name": "allowance",
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "allPairsLength",
 			"outputs": [
 				{
 					"internalType": "uint256",
@@ -139,23 +127,86 @@
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "spender",
+					"name": "tokenA",
 					"type": "address"
 				},
 				{
-					"internalType": "uint256",
-					"name": "value",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "tokenB",
+					"type": "address"
 				}
 			],
-			"name": "approve",
+			"name": "createPair",
 			"outputs": [
 				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
+					"internalType": "address",
+					"name": "pair",
+					"type": "address"
 				}
 			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "feeTo",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "feeToSetter",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "tokenA",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "tokenB",
+					"type": "address"
+				}
+			],
+			"name": "getPair",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "pair",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "setFeeTo",
+			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
 		},
@@ -163,123 +214,12 @@
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "owner",
+					"name": "",
 					"type": "address"
 				}
 			],
-			"name": "balanceOf",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "decimals",
-			"outputs": [
-				{
-					"internalType": "uint8",
-					"name": "",
-					"type": "uint8"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "name",
-			"outputs": [
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "symbol",
-			"outputs": [
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "totalSupply",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "to",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "value",
-					"type": "uint256"
-				}
-			],
-			"name": "transfer",
-			"outputs": [
-				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
-				}
-			],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "from",
-					"type": "address"
-				},
-				{
-					"internalType": "address",
-					"name": "to",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "value",
-					"type": "uint256"
-				}
-			],
-			"name": "transferFrom",
-			"outputs": [
-				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
-				}
-			],
+			"name": "setFeeToSetter",
+			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
 		}

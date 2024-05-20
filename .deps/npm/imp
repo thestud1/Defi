@@ -1,0 +1,8 @@
+/**
+ * Minified by jsDelivr using Terser v5.15.1.
+ * Original file: /npm/imp@0.0.1/build/lib/imp.js
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+(function(){var n,t=[].slice;"function"!=typeof n&&(n=require("amdefine")(module)),n((function(){return function(){e.displayName="Imp";var n=e.prototype;function e(){this.defs={}}return n.def=function(n,t,e){var r;((r=this.defs)[n]||(r[n]={}))[t]=e},n.undef=function(n,t,e){var r;(r=this.defs[n])[t]&&(delete r[t],r==={}&&delete this.defs[n])},n.isDef=function(n,t){var e;return null!=(null!=(e=this.defs[n])?e[t]:void 0)},n.conv=function(n,t){var e;return null!=(e=this.defs[n.constructor])&&"function"==typeof e[t]?e[t](n):void 0},n.wrap=function(){var n,e=this;return n=t.call(arguments),function(r){return function(){var i,o,u,f,c,s;for(i=t.call(arguments),o=[],u=0;u<n.length;){if((f=n[u])instanceof Array)for(f=f[0],c=i.length-n.length+1;c-- >0;)s=i.shift(),o.push(s.constructor===f?s:e.conv(s,f));else s=i.shift(),o.push(s.constructor===f?s:e.conv(s,f));u++}return r.apply(null,o)}}},e}()}))}).call(this);
+//# sourceMappingURL=/sm/afe047a32689136f0b4249b32f572a2b25c0c5a8c730b44a321da87feb16ddc7.map

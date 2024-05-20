@@ -1,54 +1,67 @@
-// SPDX-License-Identifier: XXX
+// SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.6.12;
 
-interface IUniswapV2Pair {
+import './libraries/SafeMath.sol';
+
+contract ERC20 {
+    using SafeMath for uint;
+
+    string public constant name = 'Uniswap V2';
+    string public constant symbol = 'UNI-V2';
+    uint8 public constant decimals = 18;
+    uint  public  totalSupply;
+    mapping(address => uint) public  balanceOf;
+    mapping(address => mapping(address => uint)) public allowance;
+
+    mapping(address => uint) public nonces;
+
     event Approval(address indexed owner, address indexed spender, uint value);
     event Transfer(address indexed from, address indexed to, uint value);
 
-    function name() external pure returns (string memory);
-    function symbol() external pure returns (string memory);
-    function decimals() external pure returns (uint8);
-    function totalSupply() external view returns (uint);
-    function balanceOf(address owner) external view returns (uint);
-    function allowance(address owner, address spender) external view returns (uint);
+    constructor() {
+  
+    }
 
-    function approve(address spender, uint value) external returns (bool);
-    function transfer(address to, uint value) external returns (bool);
-    function transferFrom(address from, address to, uint value) external returns (bool);
+    function _mint(address to, uint value) internal {
+        totalSupply = totalSupply.add(value);
+        balanceOf[to] = balanceOf[to].add(value);
+        emit Transfer(address(0), to, value);
+    }
 
-    function DOMAIN_SEPARATOR() external view returns (bytes32);
-    function PERMIT_TYPEHASH() external pure returns (bytes32);
-    function nonces(address owner) external view returns (uint);
+    function _burn(address from, uint value) internal {
+        balanceOf[from] = balanceOf[from].sub(value);
+        totalSupply = totalSupply.sub(value);
+        emit Transfer(from, address(0), value);
+    }
 
-    function permit(address owner, address spender, uint value,  uint8 v, bytes32 r, bytes32 s) external;
+    function _approve(address owner, address spender, uint value) private {
+        allowance[owner][spender] = value;
+        emit Approval(owner, spender, value);
+    }
 
-    event Mint(address indexed sender, uint amount0, uint amount1);
-    event Burn(address indexed sender, uint amount0, uint amount1, address indexed to);
-    event Swap(
-        address indexed sender,
-        uint amount0In,
-        uint amount1In,
-        uint amount0Out,
-        uint amount1Out,
-        address indexed to
-    );
-    event Sync(uint112 reserve0, uint112 reserve1);
+    function _transfer(address from, address to, uint value) private {
+        balanceOf[from] = balanceOf[from].sub(value);
+        balanceOf[to] = balanceOf[to].add(value);
+        emit Transfer(from, to, value);
+    }
 
-    function MINIMUM_LIQUIDITY() external pure returns (uint);
-    function factory() external view returns (address);
-    function token0() external view returns (address);
-    function token1() external view returns (address);
-    function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast);
-    function price0CumulativeLast() external view returns (uint);
-    function price1CumulativeLast() external view returns (uint);
-    function kLast() external view returns (uint);
+    function approve(address spender, uint value) external returns (bool) {
+        _approve(msg.sender, spender, value);
+        return true;
+    }
 
-    function mint(address to) external returns (uint liquidity);
-    function burn(address to) external returns (uint amount0, uint amount1);
-    function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external;
-    function skim(address to) external;
-    function sync() external;
+    function transfer(address to, uint value) external returns (bool) {
+        _transfer(msg.sender, to, value);
+        return true;
+    }
 
-    function initialize(address, address) external;
+    function transferFrom(address from, address to, uint value) external  returns (bool) {
+        if (allowance[from][msg.sender] != uint(-1)) {
+            allowance[from][msg.sender] = allowance[from][msg.sender].sub(value);
+        }
+        _transfer(from, to, value);
+        return true;
+    }
+
 }

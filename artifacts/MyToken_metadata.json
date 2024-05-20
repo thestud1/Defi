@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.19+commit.7dd6d404"
+		"version": "0.8.25+commit.b61c2a91"
 	},
 	"language": "Solidity",
 	"output": {
@@ -326,7 +326,7 @@
 		"compilationTarget": {
 			"nst.sol": "MyToken"
 		},
-		"evmVersion": "paris",
+		"evmVersion": "cancun",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -339,11 +339,11 @@
 	},
 	"sources": {
 		"nst.sol": {
-			"keccak256": "0x12c94b9ac2465af7a341e941be787dbf2ca8d55bee41cb8ed693b54c35ab06ac",
+			"keccak256": "0x548a6caa414cd6c03fe046e20d144d3e3258f5f5f13c4fdd19725c95078106b1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d4d0bbb7be58e320bb7448e4d12212b17cbfe3905ae560725e10e692a548be93",
-				"dweb:/ipfs/QmSEZQTU72gkqzNyrAR9rjxR4Hpt6rc4PUJu2N2HwFXyPj"
+				"bzz-raw://b8048e032d50f49d319ac7fd02b3ef77db0c92c0acdc5c828b7f0935444ad433",
+				"dweb:/ipfs/QmQZbkbrggHjqjYAZ1VGQPsGdpZsF3P72JjJxvu4tyjXnj"
 			]
 		}
 	},

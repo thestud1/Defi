@@ -1,0 +1,8 @@
+/**
+ * Minified by jsDelivr using Terser v3.14.1.
+ * Original file: /npm/import@0.0.6/index.js
+ * 
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+module.exports=function(){var e=require("fs"),r=require("path");return function n(t,i){i=i||{};var o=r.dirname(t),u=r.resolve(t);return!e.existsSync(t)||i[u]?"":(i[u]=1,e.readFileSync(t).toString().replace(/^(?:(?!\/[\/*]))([ \t]*)(.*)import [\"\'](.+)[\"\'];(?![^\*]+\*\/)/gm,function(e,t,u,a){return t+u+n(r.resolve(o,a+".js"),i).replace(/\n/g,"\n"+t)}))}}();
+//# sourceMappingURL=/sm/041d51cc9cb275e39c509fd93a88739ca52808037d94577253cb54ecc9fe7ffa.map
