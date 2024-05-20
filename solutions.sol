@@ -201,10 +201,12 @@ contract Wechselkurs {
         }
 
         // Calculate the output amount using the router's getAmountOut function
+        if(reserveA>0 && reserveB>0){
         uint amountOut = router.getAmountOut(amountIn, reserveA, reserveB);
-        
-        // Adjust the output amount by the decimals of tokenB
         return amountOut;
+        }
+        // Adjust the output amount by the decimals of tokenB
+        return 0;
     }
 }
 
@@ -216,9 +218,9 @@ contract PairGetter {
     address defi = 0xE5873093edA4e64b77C80186aDC5be024444fcbd;
     mapping(address => address[2]) public pairs;
     mapping(address => bool) exists;
-    mapping(uint256 => address) uniqueAddresses;
-    uint256 ind = 0;
-
+    mapping(uint256 => address) public uniqueAddresses;
+    uint256 public ind = 0;
+    uint256 public ActualPairs = 0;
     constructor() {
         factory = IFactory(0x0Ca73866dFf0f6b0508F5Cbb223C857C19463e07);
         router = IRouter(0x5DA88dF55AF2E5681D33f36e5916d63797BF4766);
@@ -243,7 +245,7 @@ contract PairGetter {
                 ind++;
             }
         }
-
+        
         for (uint256 i = 0; i < ind; i++) {
             address pair0 = factory.getPair(uniqueAddresses[i], weth);
             address pair1 = factory.getPair(uniqueAddresses[i], defi);
@@ -251,10 +253,50 @@ contract PairGetter {
             if (pair0 != address(0) && pair1 != address(0)) {
                 pairs[uniqueAddresses[i]][0] = pair0;
                 pairs[uniqueAddresses[i]][1] = pair1;
+                
+                ActualPairs++;
+            }else{
+                uniqueAddresses[i] = address(0);
             }
         }
 
         return true;
     }
 }
+
+contract GetExchangeRate {
+    PairGetter public pairGetter;
+    IFactory public factory;
+    IRouter public router;
+    Wechselkurs public wechselkurs;
+    address public weth = 0xDE39C89e7A8E3Fc73e1e7f8b2edecD4c7FE62b66;
+    address public defi = 0xE5873093edA4e64b77C80186aDC5be024444fcbd;
+    uint256 public ETH = 1 ether;
+    uint256[] public EXrate;
+
+    constructor() {
+        factory = IFactory(0x0Ca73866dFf0f6b0508F5Cbb223C857C19463e07);
+        router = IRouter(0x5DA88dF55AF2E5681D33f36e5916d63797BF4766);       
+        pairGetter = PairGetter(0x92721e164A5848C0071d6Be7D4c4B11d7932e0aF);
+        wechselkurs = Wechselkurs(0x8a968C762063170cBBB3eac00F530cB425D5806F);
+    }
+
+    function getExRates() public returns (bool) {
+        uint256 ind = pairGetter.ind(); // Get the latest ind value each time
+        for (uint256 i = 0; i < ind; i++) {
+            
+            address middleCoin = pairGetter.uniqueAddresses(i);
+
+            if(middleCoin!=address(0)){
+            uint256 ex1 = wechselkurs.getWechselkurs(ETH, IERC20(weth), IERC20(middleCoin));
+            if(ex1!=0){
+                uint256 ex2 = wechselkurs.getWechselkurs(ex1, IERC20(middleCoin), IERC20(defi));
+                EXrate.push(ex2);
+            }
+            }
+        }
+        return true;
+    }
+}
+
 
