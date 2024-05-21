@@ -300,6 +300,19 @@ contract GetExchangeRate {
         }
         return true;
     }
+
+    function getBestExRates() public view returns(uint256){
+        uint256 ind = EXrate.length;
+        uint256 max = 0;
+        for(uint256 i = 0; i<ind; i++){
+            if(EXrate[i]>max){
+                max = EXrate[i];
+            }
+        }
+        return max;
+    }
 }
+
+
 
 

@@ -1,6 +1,6 @@
 {
   "name": "GetExchangeRate",
-  "address": "0x4546e42e8a22cfda7f1360b477628d7c577f76f8",
+  "address": "0x1115fe86f598a510f04c19e20ca3ebebaf6cee46",
   "abi": [
     {
       "inputs": [],
@@ -80,6 +80,19 @@
     },
     {
       "inputs": [],
+      "name": "getBestExRates",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "pairGetter",
       "outputs": [
         {
@@ -132,5 +145,5 @@
     }
   ],
   "filePath": "default_workspace/solutions.sol",
-  "pinnedAt": 1716281598787
+  "pinnedAt": 1716303877235
 }
