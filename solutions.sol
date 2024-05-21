@@ -228,7 +228,8 @@ contract PairGetter {
 
     function getAllPairs() public returns (bool) {
         uint256 length = factory.allPairsLength();
-        
+        ind = 0;
+        ActualPairs = 0;
         for (uint256 i = 0; i < length; i++) {
             IPair pairAddress = IPair(factory.allPairs(i));
             address token0 = pairAddress.token0();
@@ -277,12 +278,14 @@ contract GetExchangeRate {
     constructor() {
         factory = IFactory(0x0Ca73866dFf0f6b0508F5Cbb223C857C19463e07);
         router = IRouter(0x5DA88dF55AF2E5681D33f36e5916d63797BF4766);       
-        pairGetter = PairGetter(0x92721e164A5848C0071d6Be7D4c4B11d7932e0aF);
+        pairGetter = PairGetter(0xAe3Dfd7219F489db56a4AC51dca613a3F9A282b2);
         wechselkurs = Wechselkurs(0x3466EeC48Ec873007F8457f506B631bbDeC19eB1);
     }
 
     function getExRates() public returns (bool) {
+        delete EXrate;
         uint256 ind = pairGetter.ind(); // Get the latest ind value each time
+
         for (uint256 i = 0; i < ind; i++) {
             
             address middleCoin = pairGetter.uniqueAddresses(i);

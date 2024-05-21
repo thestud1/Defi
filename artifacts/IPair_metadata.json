@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.19+commit.7dd6d404"
 	},
 	"language": "Solidity",
 	"output": {
@@ -667,7 +667,7 @@
 		"compilationTarget": {
 			"solutions.sol": "IPair"
 		},
-		"evmVersion": "london",
+		"evmVersion": "paris",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -680,11 +680,11 @@
 	},
 	"sources": {
 		"solutions.sol": {
-			"keccak256": "0x428c01fee4198c7ec90934447d01e87e572514ceb4c76fa270eebb789c99e353",
+			"keccak256": "0xd6017e625200faef50c43480843f8b4bd7aea138be9e398576b8136e2ac5bb91",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://51468c9dc8f3db9480bdd166616dbe20e6c2dbece96cfe5ae6655f632b559b18",
-				"dweb:/ipfs/QmWVfR9ATerQSiEWKWQLtNkyTEhk2crryzeKhfqL7jmELy"
+				"bzz-raw://234740dd99bcbe562b6b5d290c799c39ac67dc8dafd281d2b040d1148bb9a50d",
+				"dweb:/ipfs/Qmf76HD4HEdFYzUpVyFD6Vea9PkyM2yQLGtNp4u4pChwPB"
 			]
 		}
 	},
